@@ -10,18 +10,12 @@ User.init(
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
-      validate: {
-        isEmail: { msg: 'username must be a valid email address' },
-      },
+      validate: { isEmail: { msg: 'username must be a valid email address' } },
     },
     name: { type: DataTypes.STRING, allowNull: false },
+    disabled: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
-  {
-    sequelize,
-    underscored: true,
-    timestamps: true,
-    modelName: 'user',
-  }
+  { sequelize, underscored: true, timestamps: true, modelName: 'user' }
 )
 
 module.exports = User
