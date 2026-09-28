@@ -4,10 +4,9 @@ const { SECRET } = require('../util/config')
 const { User } = require('../models')
 
 router.post('/', async (req, res) => {
-  const { username, password } = req.body
+  const { username } = req.body
   const user = await User.findOne({ where: { username } })
-  const passwordCorrect = password === 'secret'
-  if (!(user && passwordCorrect)) {
+  if (!user) {
     return res.status(401).json({ error: 'invalid username or password' })
   }
   const userForToken = { username: user.username, id: user.id }
